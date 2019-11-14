@@ -1,0 +1,64 @@
+﻿@page
+@model FrontEnd.Pages.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Tarefa</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tarefa.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tarefa.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tarefa.Descricao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tarefa.Descricao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tarefa.DataEHoraCriacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tarefa.DataEHoraCriacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tarefa.DataEHoraEdicao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tarefa.DataEHoraEdicao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tarefa.DataEHoraConclusao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tarefa.DataEHoraConclusao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tarefa.DataEHoraDelecao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tarefa.DataEHoraDelecao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tarefa.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tarefa.Status)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Tarefa.ID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>
