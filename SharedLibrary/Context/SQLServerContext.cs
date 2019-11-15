@@ -9,7 +9,7 @@ namespace SharedLibrary.Context
 		{
 		}
 
-		public SQLServerContext(DbContextOptions<SQLServerContext> options) : base (options)
+		public SQLServerContext(DbContextOptions<SQLServerContext> options) : base(options)
 		{
 		}
 

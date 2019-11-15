@@ -1,30 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
+using SharedLibrary.Entities;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using SharedLibrary.Context;
-using SharedLibrary.Entities;
 
 namespace FrontEnd.Pages
 {
-    public class DeleteModel : PageModel
-    {
-        private readonly SharedLibrary.Context.SQLServerContext _context;
+	public class DeleteModel : PageModel
+	{
 
-        public DeleteModel(SharedLibrary.Context.SQLServerContext context)
-        {
-            _context = context;
-        }
+		public DeleteModel()
+		{
+		}
 
-        [BindProperty]
-        public Tarefa Tarefa { get; set; }
+		[BindProperty]
+		public Tarefa Tarefa { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+		public async Task<IActionResult> OnGetAsync(int? id)
 		{
 			var uri = "https://apitarefas.azurewebsites.net/api/Tarefas";
 			using (HttpClient client = new HttpClient())
@@ -47,7 +40,7 @@ namespace FrontEnd.Pages
 			return Page();
 		}
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+		public async Task<IActionResult> OnPostAsync(int? id)
 		{
 			var uri = "https://apitarefas.azurewebsites.net/api/Tarefas";
 			using (HttpClient client = new HttpClient())
@@ -63,6 +56,6 @@ namespace FrontEnd.Pages
 			}
 
 			return RedirectToPage("./Index");
-        }
-    }
+		}
+	}
 }
