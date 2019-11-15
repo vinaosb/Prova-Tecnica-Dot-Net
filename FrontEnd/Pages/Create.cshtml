@@ -24,31 +24,6 @@
                 <span asp-validation-for="Tarefa.Descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Tarefa.DataEHoraCriacao" class="control-label"></label>
-                <input asp-for="Tarefa.DataEHoraCriacao" class="form-control" />
-                <span asp-validation-for="Tarefa.DataEHoraCriacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tarefa.DataEHoraEdicao" class="control-label"></label>
-                <input asp-for="Tarefa.DataEHoraEdicao" class="form-control" />
-                <span asp-validation-for="Tarefa.DataEHoraEdicao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tarefa.DataEHoraConclusao" class="control-label"></label>
-                <input asp-for="Tarefa.DataEHoraConclusao" class="form-control" />
-                <span asp-validation-for="Tarefa.DataEHoraConclusao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tarefa.DataEHoraDelecao" class="control-label"></label>
-                <input asp-for="Tarefa.DataEHoraDelecao" class="form-control" />
-                <span asp-validation-for="Tarefa.DataEHoraDelecao" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Tarefa.Status" /> @Html.DisplayNameFor(model => model.Tarefa.Status)
-                </label>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

@@ -27,7 +27,7 @@ namespace API_Tarefas
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddDbContext<SQLServerContext>(options => options.UseInMemoryDatabase("SQLServerContext"));
+			services.AddDbContext<SQLServerContext>(options => options.UseSqlServer("DBConnection"));
 			services.AddControllers();
 
 			// Register the Swagger services

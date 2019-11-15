@@ -10,50 +10,56 @@
 <div>
     <h4>Tarefa</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tarefa.Nome)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tarefa.Nome)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tarefa.Descricao)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tarefa.Descricao)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tarefa.DataEHoraCriacao)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tarefa.DataEHoraCriacao)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tarefa.DataEHoraEdicao)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tarefa.DataEHoraEdicao)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tarefa.DataEHoraConclusao)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tarefa.DataEHoraConclusao)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tarefa.DataEHoraDelecao)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tarefa.DataEHoraDelecao)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tarefa.Status)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tarefa.Status)
-        </dd>
-    </dl>
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Tarefa.Nome)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Tarefa.Nome)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Tarefa.Descricao)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Tarefa.Descricao)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Tarefa.DataEHoraCriacao)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Tarefa.DataEHoraCriacao)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Tarefa.DataEHoraEdicao)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Tarefa.DataEHoraEdicao)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Tarefa.DataEHoraConclusao)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Tarefa.DataEHoraConclusao)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Tarefa.DataEHoraDelecao)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Tarefa.DataEHoraDelecao)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Tarefa.Status)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Tarefa.Status)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Tarefa.Deleted)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Tarefa.Deleted)
+		</dd>
+	</dl>
 </div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Tarefa.ID">Edit</a> |

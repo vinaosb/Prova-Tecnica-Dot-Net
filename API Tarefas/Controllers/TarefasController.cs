@@ -47,35 +47,31 @@ namespace Prova_Tecnica_Dot_Net.Controllers
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTarefa(int id, Tarefa tarefa)
-        {
-            if (id != tarefa.ID)
+		{
+			if (id != tarefa.ID)
             {
                 return BadRequest();
-            }
+			}
+			var tar = await _context.Tasks.FindAsync(id);
 
+			if (tarefa.Nome == null)
+				_context.Entry(tarefa).Entity.Nome = tar.Nome;
+			if (tarefa.Descricao == null)
+				_context.Entry(tarefa).Entity.Descricao = tar.Descricao;
+
+			_context.Entry(tarefa).Entity.DataEHoraCriacao = tar.DataEHoraCriacao;
+			_context.Entry(tarefa).Entity.DataEHoraDelecao = tar.DataEHoraDelecao;
 			_context.Entry(tarefa).Entity.DataEHoraEdicao = DateTime.Now;
 			if (tarefa.Status)
 				_context.Entry(tarefa).Entity.DataEHoraConclusao = DateTime.Now;
+			else
+				_context.Entry(tarefa).Entity.DataEHoraConclusao = tar.DataEHoraConclusao;
 
 			_context.Entry(tarefa).State = EntityState.Modified;
 
-			try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TarefaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+			await _context.SaveChangesAsync();
 
-            return NoContent();
+			return NoContent();
         }
 
         // POST: api/Tarefas
@@ -83,10 +79,10 @@ namespace Prova_Tecnica_Dot_Net.Controllers
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<Tarefa>> PostTarefa(Tarefa tarefa)
-        {
-            _context.Tasks.Add(tarefa);
-            await _context.SaveChangesAsync();
+		{
 			tarefa.DataEHoraCriacao = DateTime.Now;
+			_context.Tasks.Add(tarefa);
+            await _context.SaveChangesAsync();
             return CreatedAtAction("GetTarefa", new { id = tarefa.ID }, tarefa);
         }
 
@@ -102,9 +98,12 @@ namespace Prova_Tecnica_Dot_Net.Controllers
             {
                 return NotFound();
             }
+			_context.Entry(tarefa).Entity.Deleted = true;
+			_context.Entry(tarefa).Entity.DataEHoraDelecao = DateTime.Now;
 
-            _context.Tasks.Remove(tarefa);
-            await _context.SaveChangesAsync();
+			_context.Entry(tarefa).State = EntityState.Modified;
+
+			await _context.SaveChangesAsync();
 
             return tarefa;
         }

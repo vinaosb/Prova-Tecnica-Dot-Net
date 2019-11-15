@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using SharedLibrary.Context;
 using SharedLibrary.Entities;
 
@@ -36,12 +37,23 @@ namespace FrontEnd.Pages
             {
                 return Page();
             }
+			var uri = "https://apitarefas.azurewebsites.net/api/Tarefas";
 
-			var request = new HttpRequestMessage(HttpMethod.Post, "https://api.github.com/repos/aspnet/AspNetCore.Docs/branches");
-            _context.Tasks.Add(Tarefa);
-            await _context.SaveChangesAsync();
+			using (HttpClient client = new HttpClient())
+			{
+				Tarefa ret = null;
+				HttpContent cont = new StringContent(JsonConvert.SerializeObject(Tarefa));
+				cont.Headers.ContentType.MediaType = "application/json";
+				var response = await client.PostAsync(uri, cont);
 
-            return RedirectToPage("./Index");
+				if (response.IsSuccessStatusCode)
+				{
+					var t = await response.Content.ReadAsStringAsync();
+					ret = JsonConvert.DeserializeObject<Tarefa>(t);
+				}
+			}
+
+			return RedirectToPage("./Index");
         }
     }
 }

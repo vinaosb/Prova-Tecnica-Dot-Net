@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using SharedLibrary.Context;
 using SharedLibrary.Entities;
 
@@ -24,20 +26,27 @@ namespace FrontEnd.Pages
         public Tarefa Tarefa { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+		{
+			var uri = "https://apitarefas.azurewebsites.net/api/Tarefas";
+			using (HttpClient client = new HttpClient())
+			{
+				Tarefa ret = null;
+				var response = await client.GetAsync(uri + "/" + id);
 
-            Tarefa = await _context.Tasks.FirstOrDefaultAsync(m => m.ID == id);
+				if (response.IsSuccessStatusCode)
+				{
+					var t = await response.Content.ReadAsStringAsync();
+					ret = JsonConvert.DeserializeObject<Tarefa>(t);
+				}
+				Tarefa = ret;
+			}
 
-            if (Tarefa == null)
-            {
-                return NotFound();
-            }
-            return Page();
-        }
+			if (Tarefa == null)
+			{
+				return NotFound();
+			}
+			return Page();
+		}
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -46,32 +55,24 @@ namespace FrontEnd.Pages
             if (!ModelState.IsValid)
             {
                 return Page();
-            }
+			}
+			var uri = "https://apitarefas.azurewebsites.net/api/Tarefas";
 
-            _context.Attach(Tarefa).State = EntityState.Modified;
+			using (HttpClient client = new HttpClient())
+			{
+				Tarefa ret = null;
+				StringContent cont = new StringContent(JsonConvert.SerializeObject(Tarefa));
+				cont.Headers.ContentType.MediaType = "application/json";
+				var response = await client.PutAsync(uri + "/" + Tarefa.ID, cont);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TarefaExists(Tarefa.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+				if (response.IsSuccessStatusCode)
+				{
+					var t = await response.Content.ReadAsStringAsync();
+					ret = JsonConvert.DeserializeObject<Tarefa>(t);
+				}
+			}
 
-            return RedirectToPage("./Index");
-        }
-
-        private bool TarefaExists(int id)
-        {
-            return _context.Tasks.Any(e => e.ID == id);
+			return RedirectToPage("./Index");
         }
     }
 }
