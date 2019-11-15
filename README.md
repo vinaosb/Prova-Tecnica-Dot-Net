@@ -1,6 +1,6 @@
 # Prova-Tecnica-Dot-Net
 
-Realizei o básico em poucas horas. Fiz uma interface Web básica + API.
+Realizei o básico em poucas horas (menos de 7). Fiz uma interface Web básica + API.
 Realizei o deploy na Azure.
 
 A API possui Swagger.
